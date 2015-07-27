@@ -9,6 +9,7 @@ RUN echo "deb http://repo.mysql.com/apt/debian/ wheezy mysql-${MYSQL_MAJOR}" > /
 RUN (echo mysql-community-server mysql-community-server/data-dir select '';echo mysql-community-server mysql-community-server/root-pass password ''; echo mysql-community-server mysql-community-server/re-root-pass password ''; echo mysql-community-server mysql-community-server/remove-test-db select false; ) | debconf-set-selections    && apt-get update && apt-get install -y mysql-server="${MYSQL_VERSION}"* && rm -rf /var/lib/apt/lists/*    && rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
 RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf    
 VOLUME [/var/lib/mysql] 
+RUN wget -P / https://github.com/lgforgithub/MYSQL/blob/master/entrypoint.sh && chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"] 
 EXPOSE 3306/tcp
 CMD ["mysqld"]
