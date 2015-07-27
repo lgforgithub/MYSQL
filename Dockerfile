@@ -1,7 +1,7 @@
 FROM ubuntu
 MAINTAINER lg 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
-RUN apt-get update && apt-get install -y perl --no-install-recommends && apt-get install dialog &&  apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y perl --no-install-recommends && apt-get install -y dialog &&  apt-get install -y wget && rm -rf /var/lib/apt/lists/*
 RUN wget -P / https://raw.githubusercontent.com/lgforgithub/MYSQL/master/entrypoint.sh && chmod +x entrypoint.sh
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
 ENV MYSQL_MAJOR 5.6
